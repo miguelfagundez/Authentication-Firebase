@@ -1,6 +1,6 @@
-# authentication_firebase
+# Authentication Firebase
 
-A new Flutter project.
+Example project connecting Firebase using Clean Architecture & BloC.
 
 ## Getting Started
 
