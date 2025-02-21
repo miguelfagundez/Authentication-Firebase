@@ -1,7 +1,12 @@
+import 'package:authentication_firebase/di.dart';
 import 'package:flutter/material.dart';
 import 'package:authentication_firebase/config/routes/app_routes.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Init Bloc dependencies
+  await init();
   runApp(const MyApp());
 }
 

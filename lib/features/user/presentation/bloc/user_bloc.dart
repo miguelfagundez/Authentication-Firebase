@@ -31,7 +31,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
 
     resp.fold(
-      (userAuthenticatedFailure) => emit(UserAuthenticateFailureState()),
+      (userAuthenticatedFailure) {
+        debugPrint('User was not Authenticated - Try Again!');
+        emit(UserAuthenticateFailureState());
+      },
       (userAuthenticatedSuccess) {
         debugPrint(
           'User was Authenticated successfully, ${userAuthenticatedSuccess.email}',

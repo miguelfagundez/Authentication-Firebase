@@ -1,6 +1,5 @@
 import 'package:authentication_firebase/core/errors/failures.dart';
 import 'package:authentication_firebase/features/user/domain/entities/user.dart';
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 
 abstract class UserFirebaseDataSource {
