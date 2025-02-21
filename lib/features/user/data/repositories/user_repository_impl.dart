@@ -8,9 +8,9 @@ class UserRepositoryImpl implements UserRepository {
   // --------------------------------
   // Need to be implemented
   // --------------------------------
-  final UserDatasource userDatasource;
+  final UserFirebaseDatasourceImpl userFirebaseDatasource;
 
-  UserRepositoryImpl({required this.userDatasource});
+  UserRepositoryImpl({required this.userFirebaseDatasource});
 
   @override
   Future<Either<Failure, User>> authenticateUserWithEmail(
@@ -18,41 +18,43 @@ class UserRepositoryImpl implements UserRepository {
     String password,
   ) async {
     try {
-      final User user = User(
-        id: "1",
-        name: 'name',
-        email: 'email',
-        password: 'password',
-        createAt: DateTime.now(),
+      final User user = await userFirebaseDatasource.authenticateUserWithEmail(
+        email,
+        password,
       );
       return Right(user);
     } catch (e) {
-      return Left(FirebaseFailure());
+      return Left(FirebaseFailure(message: e.toString(), code: '400'));
     }
   }
 
   @override
   Future<Either<Failure, bool>> changePassword(String email) async {
     try {
-      final bool result = true;
+      final bool result = await userFirebaseDatasource.changePassword(email);
       return Right(result);
     } catch (e) {
-      return Left(FirebaseFailure());
+      return Left(FirebaseFailure(message: e.toString(), code: '400'));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> registerUser(
+  Future<Either<Failure, User>> registerUser(
     String name,
     String email,
     String password,
     DateTime time,
   ) async {
     try {
-      final bool result = true;
+      final User result = await userFirebaseDatasource.registerUser(
+        name,
+        email,
+        password,
+        time,
+      );
       return Right(result);
     } catch (e) {
-      return Left(FirebaseFailure());
+      return Left(FirebaseFailure(message: e.toString(), code: '400'));
     }
   }
 }

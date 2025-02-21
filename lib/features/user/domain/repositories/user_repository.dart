@@ -5,7 +5,7 @@ import 'package:authentication_firebase/features/user/domain/entities/user.dart'
 
 abstract class UserRepository {
   // Register a new user using email/password
-  Future<Either<Failure, bool>> registerUser(
+  Future<Either<Failure, User>> registerUser(
     String name,
     String email,
     String password,

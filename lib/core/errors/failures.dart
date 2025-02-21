@@ -1,5 +1,7 @@
 abstract class Failure {}
 
 class FirebaseFailure extends Failure {
-  FirebaseFailure();
+  final String message;
+  final String code;
+  FirebaseFailure({required this.message, required this.code});
 }
