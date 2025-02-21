@@ -41,14 +41,18 @@ class UserFirebaseDatasourceImpl implements UserFirebaseDataSource {
   Future<User> authenticateUserWithEmail(String email, String password) async {
     try {
       // HERE: Firebase call
-      final User user = User(
-        id: "1",
-        name: 'name',
-        email: 'email@email.com',
-        password: 'password123',
-        createAt: DateTime.now(),
-      );
-      return user;
+      if (password == 'password123') {
+        final User user = User(
+          id: "1",
+          name: 'name',
+          email: 'email@email.com',
+          password: 'password123',
+          createAt: DateTime.now(),
+        );
+        return user;
+      } else {
+        throw FormatException('Error - Wrong password. Try again.');
+      }
     } catch (error) {
       debugPrint(error.toString());
       throw (FirebaseFailure(message: error.toString(), code: '400'));

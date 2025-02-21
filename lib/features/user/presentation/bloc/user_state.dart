@@ -8,11 +8,12 @@ abstract class UserState {
 }
 
 class UserInitialState extends UserState {
-  const UserInitialState() : super(isAuthenticated: false);
+  const UserInitialState() : super(isAuthenticated: false, user: null);
 }
 
 class UserAuthenticateFailureState extends UserState {
-  const UserAuthenticateFailureState() : super(isAuthenticated: false);
+  const UserAuthenticateFailureState()
+    : super(isAuthenticated: false, user: null);
 }
 
 class UserAuthenticateSuccessfulState extends UserState {

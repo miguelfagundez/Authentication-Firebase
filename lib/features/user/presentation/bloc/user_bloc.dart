@@ -30,14 +30,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       event.password,
     );
 
-    resp.fold((updateScanFailure) => emit(UserAuthenticateFailureState()), (
-      userAuthenticatedSuccess,
-    ) {
-      debugPrint(
-        'User was Authenticated successfully, ${userAuthenticatedSuccess.email}',
-      );
-      //add(GetAllScansEvent());
-      emit(UserAuthenticateSuccessfulState(userAuthenticatedSuccess));
-    });
+    resp.fold(
+      (userAuthenticatedFailure) => emit(UserAuthenticateFailureState()),
+      (userAuthenticatedSuccess) {
+        debugPrint(
+          'User was Authenticated successfully, ${userAuthenticatedSuccess.email}',
+        );
+        //add(SomeUserEvent());
+        emit(UserAuthenticateSuccessfulState(userAuthenticatedSuccess));
+      },
+    );
   }
 }
