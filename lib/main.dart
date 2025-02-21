@@ -1,3 +1,4 @@
+import 'package:authentication_firebase/features/user/presentation/pages/forgot_password_page.dart';
 import 'package:authentication_firebase/features/user/presentation/pages/login_page.dart';
 import 'package:authentication_firebase/features/user/presentation/pages/register_page.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Auth Firebase',
       debugShowCheckedModeBanner: false,
-      home: RegisterPage(),
+      home: ForgotPasswordPage(),
     );
   }
 }
