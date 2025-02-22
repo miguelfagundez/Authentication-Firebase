@@ -26,3 +26,8 @@ class UserAuthenticateSuccessfulState extends UserState {
   const UserAuthenticateSuccessfulState(this.authenticatedUser)
     : super(isAuthenticated: true, user: authenticatedUser);
 }
+
+class LogoutUserState extends UserState {
+  const LogoutUserState()
+    : super(isAuthenticated: false, user: null, passwordChanged: false);
+}

@@ -128,11 +128,24 @@ class _LoginPageState extends State<LoginPage> {
                         ButtonSquareWithImage(
                           imagePath: 'assets/images/google.png',
                           imageSize: 40,
+                          myOnTap: () {
+                            debugPrint('Google');
+                            BlocProvider.of<UserBloc>(
+                              context,
+                              listen: false,
+                            ).add(LogoutUserEvent());
+                          },
                         ),
                         const SizedBox(width: 25),
                         ButtonSquareWithImage(
                           imagePath: 'assets/images/apple.png',
                           imageSize: 40,
+                          myOnTap: () {
+                            debugPrint('Apple');
+                            debugPrint(
+                              'User is Authenticated?: ${state.isAuthenticated}',
+                            );
+                          },
                         ),
                       ],
                     ),

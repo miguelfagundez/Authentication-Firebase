@@ -11,6 +11,7 @@ abstract class UserFirebaseDataSource {
     DateTime time,
   );
   Future<bool> changePassword(String email);
+  Future<bool> logoutUser();
 }
 
 // --------------------------------
@@ -63,5 +64,12 @@ class UserFirebaseDataSourceImpl implements UserFirebaseDataSource {
   Future<bool> changePassword(String email) async {
     // HERE: Firebase call
     return false;
+  }
+
+  @override
+  Future<bool> logoutUser() async {
+    // HERE: Firebase call
+    debugPrint('User was logout successfully');
+    return true;
   }
 }

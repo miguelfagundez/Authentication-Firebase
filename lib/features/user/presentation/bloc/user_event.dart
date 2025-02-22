@@ -26,3 +26,7 @@ class ChangePasswordEvent extends UserEvent {
 
   ChangePasswordEvent({required this.email});
 }
+
+class LogoutUserEvent extends UserEvent {
+  LogoutUserEvent();
+}

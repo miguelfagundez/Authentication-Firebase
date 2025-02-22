@@ -20,4 +20,7 @@ abstract class UserRepository {
 
   // Change password
   Future<Either<Failure, bool>> changePassword(String email);
+
+  // LogoutUser
+  Future<Either<Failure, bool>> logoutUser();
 }

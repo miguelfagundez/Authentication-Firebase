@@ -1,4 +1,5 @@
 import 'package:authentication_firebase/features/user/domain/usecases/change_password_usecase.dart';
+import 'package:authentication_firebase/features/user/domain/usecases/logout_usecase.dart';
 import 'package:authentication_firebase/features/user/domain/usecases/register_user_usecase.dart';
 import 'package:get_it/get_it.dart';
 import 'package:authentication_firebase/features/user/presentation/bloc/user_bloc.dart';
@@ -31,11 +32,16 @@ Future<void> initServices() async {
     RegisterUserUsecase(userRepository: userRepositoryImpl),
   );
 
+  final LogoutUseCase logoutUserUsecase = di.registerSingleton(
+    LogoutUseCase(userRepository: userRepositoryImpl),
+  );
+
   di.registerFactory(
     () => UserBloc(
       authenticateUserWithEmailUsecase,
       changePasswordUsecase,
       registerUserUsecase,
+      logoutUserUsecase,
     ),
   );
   // ------------------- END: UserBloc -------------------

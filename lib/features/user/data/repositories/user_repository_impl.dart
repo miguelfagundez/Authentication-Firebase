@@ -57,4 +57,14 @@ class UserRepositoryImpl implements UserRepository {
       return Left(FirebaseFailure(message: e.toString(), code: '400'));
     }
   }
+
+  @override
+  Future<Either<Failure, bool>> logoutUser() async {
+    try {
+      final bool result = await userFirebaseDatasource.logoutUser();
+      return Right(result);
+    } catch (e) {
+      return Left(FirebaseFailure(message: e.toString(), code: '400'));
+    }
+  }
 }
