@@ -8,7 +8,7 @@ class UserRepositoryImpl implements UserRepository {
   // --------------------------------
   // Need to be implemented
   // --------------------------------
-  final UserFirebaseDatasourceImpl userFirebaseDatasource;
+  final UserFirebaseDataSourceImpl userFirebaseDatasource;
 
   UserRepositoryImpl({required this.userFirebaseDatasource});
 

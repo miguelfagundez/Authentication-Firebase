@@ -16,7 +16,7 @@ abstract class UserFirebaseDataSource {
 // --------------------------------
 // Need to be implemented
 // --------------------------------
-class UserFirebaseDatasourceImpl implements UserFirebaseDataSource {
+class UserFirebaseDataSourceImpl implements UserFirebaseDataSource {
   // Register a new user using email/password
   @override
   Future<User> registerUser(

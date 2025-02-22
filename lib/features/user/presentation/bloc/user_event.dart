@@ -13,3 +13,16 @@ class AuthenticateUserWithEmailEvent extends UserEvent {
 
   AuthenticateUserWithEmailEvent({required this.email, required this.password});
 }
+
+class RegisterUserWithEmailEvent extends UserEvent {
+  final String email;
+  final String password;
+
+  RegisterUserWithEmailEvent({required this.email, required this.password});
+}
+
+class ChangePasswordEvent extends UserEvent {
+  final String email;
+
+  ChangePasswordEvent({required this.email});
+}

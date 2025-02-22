@@ -4,7 +4,12 @@ part of 'user_bloc.dart';
 abstract class UserState {
   final bool isAuthenticated;
   final User? user;
-  const UserState({this.isAuthenticated = false, this.user});
+  final bool? passwordChanged;
+  const UserState({
+    this.isAuthenticated = false,
+    this.user,
+    this.passwordChanged,
+  });
 }
 
 class UserInitialState extends UserState {

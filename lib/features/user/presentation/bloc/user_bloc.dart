@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:authentication_firebase/features/user/domain/entities/user.dart';
 import 'package:authentication_firebase/features/user/domain/usecases/authenticate_user_with_email_usecase.dart';
 import 'package:authentication_firebase/features/user/domain/usecases/change_password_usecase.dart';
@@ -10,15 +12,64 @@ part 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
   final AuthenticateUserWithEmailUsecase _authenticateUserWithEmailUsecase;
-  // final ChangePasswordUsecase _changePasswordUsecase;
-  // final RegisterUserUsecase _registerUserUsecase;
+  final ChangePasswordUsecase _changePasswordUsecase;
+  final RegisterUserUsecase _registerUserUsecase;
 
   UserBloc(
     this._authenticateUserWithEmailUsecase,
-    // this._changePasswordUsecase,
-    // this._registerUserUsecase,
+    this._changePasswordUsecase,
+    this._registerUserUsecase,
   ) : super(UserInitialState()) {
     on<AuthenticateUserWithEmailEvent>(_authenticateUserWithEmailEvent);
+    on<RegisterUserWithEmailEvent>(_registerUserEvent);
+    on<ChangePasswordEvent>(_changePasswordEvent);
+  }
+
+  _changePasswordEvent(
+    ChangePasswordEvent event,
+    Emitter<UserState> emit,
+  ) async {
+    final resp = await _changePasswordUsecase(event.email);
+
+    resp.fold(
+      (userAuthenticatedFailure) {
+        debugPrint('Password was not changed - Try Again!');
+        emit(UserAuthenticateFailureState());
+      },
+      (passwordChangedSuccess) {
+        debugPrint(
+          'Password was changed successfully, $passwordChangedSuccess',
+        );
+        //add(SomeUserEvent());
+        //emit();
+      },
+    );
+  }
+
+  _registerUserEvent(
+    RegisterUserWithEmailEvent event,
+    Emitter<UserState> emit,
+  ) async {
+    final resp = await _registerUserUsecase(
+      event.email,
+      event.email,
+      event.password,
+      DateTime.now(),
+    );
+
+    resp.fold(
+      (userAuthenticatedFailure) {
+        debugPrint('User was not Register - Try Again!');
+        emit(UserAuthenticateFailureState());
+      },
+      (userAuthenticatedSuccess) {
+        debugPrint(
+          'User was Authenticated successfully, ${userAuthenticatedSuccess.email}',
+        );
+        //add(SomeUserEvent());
+        emit(UserAuthenticateSuccessfulState(userAuthenticatedSuccess));
+      },
+    );
   }
 
   _authenticateUserWithEmailEvent(
