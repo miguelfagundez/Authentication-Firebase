@@ -1,12 +1,17 @@
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:authentication_firebase/di.dart';
 import 'package:authentication_firebase/config/routes/app_routes.dart';
 import 'package:authentication_firebase/features/user/presentation/bloc/user_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Init Firebase
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // Init Bloc dependencies
   await initServices();
