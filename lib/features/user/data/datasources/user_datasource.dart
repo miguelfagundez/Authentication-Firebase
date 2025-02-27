@@ -1,13 +1,12 @@
 import 'package:authentication_firebase/core/errors/failures.dart';
-import 'package:authentication_firebase/features/user/domain/entities/user.dart'
-    as myUser;
+import 'package:authentication_firebase/features/user/domain/entities/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 abstract class UserFirebaseDataSource {
-  Future<myUser.User> authenticateUserWithEmail(String email, String password);
-  Future<myUser.User?> registerUser(
+  Future<MyUser> authenticateUserWithEmail(String email, String password);
+  Future<MyUser?> registerUser(
     String name,
     String email,
     String password,
@@ -23,14 +22,14 @@ abstract class UserFirebaseDataSource {
 class UserFirebaseDataSourceImpl implements UserFirebaseDataSource {
   // Register a new user using email/password
   @override
-  Future<myUser.User> registerUser(
+  Future<MyUser> registerUser(
     String name,
     String email,
     String password,
     DateTime time,
   ) async {
     // HERE: Firebase call
-    return myUser.User(
+    return MyUser(
       id: 'id',
       name: 'name',
       email: 'email',
@@ -41,7 +40,7 @@ class UserFirebaseDataSourceImpl implements UserFirebaseDataSource {
 
   // Authenticate an existing user
   @override
-  Future<myUser.User> authenticateUserWithEmail(
+  Future<MyUser> authenticateUserWithEmail(
     String email,
     String password,
   ) async {
@@ -54,7 +53,7 @@ class UserFirebaseDataSourceImpl implements UserFirebaseDataSource {
 
       // HERE: Firebase call
       if (password == 'password123') {
-        final myUser.User user = myUser.User(
+        final MyUser user = MyUser(
           id: "1",
           name: 'name',
           email: 'email@email.com',

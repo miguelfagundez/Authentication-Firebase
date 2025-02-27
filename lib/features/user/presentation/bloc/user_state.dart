@@ -3,7 +3,7 @@ part of 'user_bloc.dart';
 @immutable
 abstract class UserState {
   final bool isAuthenticated;
-  final User? user;
+  final MyUser? user;
   final bool? passwordChanged;
   const UserState({
     this.isAuthenticated = false,
@@ -22,7 +22,7 @@ class UserAuthenticateFailureState extends UserState {
 }
 
 class UserAuthenticateSuccessfulState extends UserState {
-  final User authenticatedUser;
+  final MyUser authenticatedUser;
   const UserAuthenticateSuccessfulState(this.authenticatedUser)
     : super(isAuthenticated: true, user: authenticatedUser);
 }

@@ -13,15 +13,13 @@ class UserRepositoryImpl implements UserRepository {
   UserRepositoryImpl({required this.userFirebaseDatasource});
 
   @override
-  Future<Either<Failure, User>> authenticateUserWithEmail(
+  Future<Either<Failure, MyUser>> authenticateUserWithEmail(
     String email,
     String password,
   ) async {
     try {
-      final User user = await userFirebaseDatasource.authenticateUserWithEmail(
-        email,
-        password,
-      );
+      final MyUser user = await userFirebaseDatasource
+          .authenticateUserWithEmail(email, password);
       return Right(user);
     } catch (e) {
       return Left(FirebaseFailure(message: e.toString(), code: '400'));
@@ -39,14 +37,14 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<Failure, User>> registerUser(
+  Future<Either<Failure, MyUser>> registerUser(
     String name,
     String email,
     String password,
     DateTime time,
   ) async {
     try {
-      final User result = await userFirebaseDatasource.registerUser(
+      final MyUser result = await userFirebaseDatasource.registerUser(
         name,
         email,
         password,

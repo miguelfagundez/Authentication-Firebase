@@ -8,7 +8,7 @@ class RegisterUserUsecase {
 
   RegisterUserUsecase({required this.userRepository});
 
-  Future<Either<Failure, User>> call(
+  Future<Either<Failure, MyUser>> call(
     String name,
     String email,
     String password,

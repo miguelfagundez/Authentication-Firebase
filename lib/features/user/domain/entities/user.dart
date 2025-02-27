@@ -1,11 +1,11 @@
-class User {
+class MyUser {
   String id;
   String name;
   String email;
   String password;
   DateTime createAt;
 
-  User({
+  MyUser({
     required this.id,
     required this.name,
     required this.email,
