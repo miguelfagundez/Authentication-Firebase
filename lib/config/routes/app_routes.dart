@@ -1,4 +1,6 @@
 import 'package:authentication_firebase/config/routes/route_model.dart';
+import 'package:authentication_firebase/features/account/presentation/pages/home_page.dart';
+import 'package:authentication_firebase/features/user/presentation/pages/auth_page.dart';
 import 'package:authentication_firebase/features/user/presentation/pages/forgot_password_page.dart';
 import 'package:authentication_firebase/features/user/presentation/pages/login_page.dart';
 import 'package:authentication_firebase/features/user/presentation/pages/register_page.dart';
@@ -6,10 +8,16 @@ import 'package:flutter/material.dart';
 
 abstract class AppRoutes {
   // Initial screen
-  static const initialRoute = 'login';
+  static const initialRoute = 'auth';
 
   // Route models - App routes
   static final menuRoutes = <RouteModel>[
+    RouteModel(
+      name: 'Auth',
+      route: 'auth',
+      screen: AuthPage(),
+      icon: Icons.lock,
+    ),
     RouteModel(
       name: 'Login',
       route: 'login',
@@ -27,6 +35,12 @@ abstract class AppRoutes {
       route: 'forgot',
       screen: ForgotPasswordPage(),
       icon: Icons.send,
+    ),
+    RouteModel(
+      name: 'Home',
+      route: 'home',
+      screen: HomePage(),
+      icon: Icons.home,
     ),
   ];
 

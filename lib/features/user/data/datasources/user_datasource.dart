@@ -1,10 +1,13 @@
 import 'package:authentication_firebase/core/errors/failures.dart';
-import 'package:authentication_firebase/features/user/domain/entities/user.dart';
+import 'package:authentication_firebase/features/user/domain/entities/user.dart'
+    as myUser;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 abstract class UserFirebaseDataSource {
-  Future<User> authenticateUserWithEmail(String email, String password);
-  Future<User?> registerUser(
+  Future<myUser.User> authenticateUserWithEmail(String email, String password);
+  Future<myUser.User?> registerUser(
     String name,
     String email,
     String password,
@@ -20,14 +23,14 @@ abstract class UserFirebaseDataSource {
 class UserFirebaseDataSourceImpl implements UserFirebaseDataSource {
   // Register a new user using email/password
   @override
-  Future<User> registerUser(
+  Future<myUser.User> registerUser(
     String name,
     String email,
     String password,
     DateTime time,
   ) async {
     // HERE: Firebase call
-    return User(
+    return myUser.User(
       id: 'id',
       name: 'name',
       email: 'email',
@@ -38,11 +41,20 @@ class UserFirebaseDataSourceImpl implements UserFirebaseDataSource {
 
   // Authenticate an existing user
   @override
-  Future<User> authenticateUserWithEmail(String email, String password) async {
+  Future<myUser.User> authenticateUserWithEmail(
+    String email,
+    String password,
+  ) async {
     try {
+      debugPrint(email);
+      debugPrint(password);
+      final credentials = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      debugPrint(credentials.user?.uid);
+
       // HERE: Firebase call
       if (password == 'password123') {
-        final User user = User(
+        final myUser.User user = myUser.User(
           id: "1",
           name: 'name',
           email: 'email@email.com',
@@ -54,7 +66,9 @@ class UserFirebaseDataSourceImpl implements UserFirebaseDataSource {
         throw FormatException('Error - Wrong password. Try again.');
       }
     } catch (error) {
-      debugPrint(error.toString());
+      if (kDebugMode) {
+        debugPrint(error.toString());
+      }
       throw (FirebaseFailure(message: error.toString(), code: '400'));
     }
   }

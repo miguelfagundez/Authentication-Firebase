@@ -83,12 +83,19 @@ class _LoginPageState extends State<LoginPage> {
                       onTap: () {
                         debugPrint('Email: ${emailController.text}');
                         debugPrint('Password: ${passwordController.text}');
-                        BlocProvider.of<UserBloc>(context, listen: false).add(
-                          AuthenticateUserWithEmailEvent(
-                            email: emailController.text,
-                            password: passwordController.text,
-                          ),
-                        );
+                        if (emailController.text.isNotEmpty &&
+                            passwordController.text.isNotEmpty) {
+                          BlocProvider.of<UserBloc>(context, listen: false).add(
+                            AuthenticateUserWithEmailEvent(
+                              email: emailController.text,
+                              password: passwordController.text,
+                            ),
+                          );
+                        } else {
+                          debugPrint(
+                            'Mensaje de error. Uno o ambos campos estan vacios!',
+                          );
+                        }
                       },
                     ),
                     const SizedBox(height: 50),
@@ -158,11 +165,23 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Colors.grey[700]),
                         ),
                         const SizedBox(width: 4),
-                        const Text(
-                          'Register now',
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontWeight: FontWeight.bold,
+                        GestureDetector(
+                          onTap: () {
+                            SchedulerBinding.instance.scheduleFrameCallback((
+                              timeStamp,
+                            ) {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                'register',
+                              );
+                            });
+                          },
+                          child: const Text(
+                            'Register now',
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
                       ],

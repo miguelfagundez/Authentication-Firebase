@@ -1,5 +1,6 @@
 import 'package:authentication_firebase/features/user/presentation/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:authentication_firebase/share/presentation/widgets/button_square_with_image.dart';
 import 'package:authentication_firebase/share/presentation/widgets/button_long.dart';
 import 'package:authentication_firebase/share/presentation/widgets/custom_text_field.dart';
@@ -110,11 +111,20 @@ class RegisterPage extends StatelessWidget {
                         style: TextStyle(color: Colors.grey[700]),
                       ),
                       const SizedBox(width: 4),
-                      const Text(
-                        'Sign In',
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: () {
+                          SchedulerBinding.instance.scheduleFrameCallback((
+                            timeStamp,
+                          ) {
+                            Navigator.pushReplacementNamed(context, 'login');
+                          });
+                        },
+                        child: const Text(
+                          'Sign In',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
