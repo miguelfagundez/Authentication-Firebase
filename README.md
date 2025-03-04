@@ -50,6 +50,8 @@ Rebuild your Flutter application:
 
 🔴 Possible **Errors**:
 
-* `firebase_core` requires a higher minimum iOS deployment verion. **Solution**: Open your iOS folder in XCode and search `Runner`->`General`->`Minimum Deployment`. You should change it depending on the minimum required.
-* CocoaPod's spec repository is out-of-date to satisfy dependencies. **Solution**: Execute this command: `cd ios` and later execute this command: `pod repo update`.
+* `firebase_core` requires a higher minimum iOS deployment verion.  
+  **Solution**: Open your iOS folder in XCode and search `Runner`->`General`->`Minimum Deployment`. You should change it depending on the minimum required.
+* CocoaPod's spec repository is out-of-date to satisfy dependencies.  
+  **Solution**: Execute this command: `cd ios` and later execute this command: `pod repo update`.
   
