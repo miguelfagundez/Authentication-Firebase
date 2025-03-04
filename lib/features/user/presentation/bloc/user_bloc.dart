@@ -15,18 +15,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   final AuthenticateUserWithEmailUsecase _authenticateUserWithEmailUsecase;
   final ChangePasswordUsecase _changePasswordUsecase;
   final RegisterUserUsecase _registerUserUsecase;
-  final LogoutUseCase _logoutUsecase;
+  // final LogoutUseCase _logoutUsecase;
 
   UserBloc(
     this._authenticateUserWithEmailUsecase,
     this._changePasswordUsecase,
     this._registerUserUsecase,
-    this._logoutUsecase,
+    // this._logoutUsecase,
   ) : super(UserInitialState()) {
     on<AuthenticateUserWithEmailEvent>(_authenticateUserWithEmailEvent);
     on<RegisterUserWithEmailEvent>(_registerUserEvent);
     on<ChangePasswordEvent>(_changePasswordEvent);
-    on<LogoutUserEvent>(_logoutUserEvent);
+    // on<LogoutUserEvent>(_logoutUserEvent);
   }
 
   _changePasswordEvent(
@@ -50,6 +50,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
   }
 
+  // TODO THIS SHOULD BE IN UI BLOC
   _registerUserEvent(
     RegisterUserWithEmailEvent event,
     Emitter<UserState> emit,
@@ -100,22 +101,22 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     );
   }
 
-  FutureOr<void> _logoutUserEvent(
-    LogoutUserEvent event,
-    Emitter<UserState> emit,
-  ) async {
-    final resp = await _logoutUsecase();
+  // FutureOr<void> _logoutUserEvent(
+  //   LogoutUserEvent event,
+  //   Emitter<UserState> emit,
+  // ) async {
+  //   final resp = await _logoutUsecase();
 
-    resp.fold(
-      (logoutUserFailure) {
-        debugPrint('User cannot be logout - Try Again!');
-        //emit(UserAuthenticateFailureState());
-      },
-      (logoutUserSuccess) {
-        debugPrint('User was logout successfully');
-        //add(SomeUserEvent());
-        emit(LogoutUserState());
-      },
-    );
-  }
+  //   resp.fold(
+  //     (logoutUserFailure) {
+  //       debugPrint('User cannot be logout - Try Again!');
+  //       //emit(UserAuthenticateFailureState());
+  //     },
+  //     (logoutUserSuccess) {
+  //       debugPrint('User was logout successfully');
+  //       //add(SomeUserEvent());
+  //       emit(LogoutUserState());
+  //     },
+  //   );
+  // }
 }

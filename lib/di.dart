@@ -1,6 +1,10 @@
 import 'package:authentication_firebase/features/user/domain/usecases/change_password_usecase.dart';
 import 'package:authentication_firebase/features/user/domain/usecases/logout_usecase.dart';
 import 'package:authentication_firebase/features/user/domain/usecases/register_user_usecase.dart';
+import 'package:authentication_firebase/share/ui/data/datasources/ui_datasource.dart';
+import 'package:authentication_firebase/share/ui/data/repositories/ui_repository_impl.dart';
+import 'package:authentication_firebase/share/ui/domain/usecases/logout_user_usecase.dart';
+import 'package:authentication_firebase/share/ui/presentation/bloc/ui_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:authentication_firebase/features/user/presentation/bloc/user_bloc.dart';
 import 'package:authentication_firebase/features/user/data/datasources/user_datasource.dart';
@@ -31,39 +35,33 @@ Future<void> initServices() async {
     RegisterUserUsecase(userRepository: userRepositoryImpl),
   );
 
-  final LogoutUseCase logoutUserUsecase = di.registerSingleton(
-    LogoutUseCase(userRepository: userRepositoryImpl),
-  );
+  // final LogoutUseCase logoutUserUsecase = di.registerSingleton(
+  //   LogoutUseCase(userRepository: userRepositoryImpl),
+  // );
 
   di.registerFactory(
     () => UserBloc(
       authenticateUserWithEmailUsecase,
       changePasswordUsecase,
       registerUserUsecase,
-      logoutUserUsecase,
+      // logoutUserUsecase,
     ),
   );
   // ------------------- END: UserBloc -------------------
 
-  // -----------------------------------------------
-  // --- bloc register ---
-  // di.registerFactory(() => UserBloc(di(), di(), di()));
+  // ------------------- BEGIN: UiBloc -------------------
+  final UiDataSourceImpl uiDataSource = di.registerSingleton(
+    UiDataSourceImpl(),
+  );
 
-  // // --- usecases ---
-  // // User
-  // di.registerLazySingleton(
-  //   () => AuthenticateUserWithEmailUsecase(userRepository: di()),
-  // );
-  // di.registerLazySingleton(() => ChangePasswordUsecase(userRepository: di()));
-  // di.registerLazySingleton(() => RegisterUserUsecase(userRepository: di()));
+  final UiRepositoryImpl uiRepositoryImpl = di.registerSingleton(
+    UiRepositoryImpl(uiDatasource: uiDataSource),
+  );
 
-  // // --- repository ---
-  // di.registerLazySingleton<UserRepository>(
-  //   () => UserRepositoryImpl(userFirebaseDatasource: di()),
-  // );
+  final LogoutUserUsecase logoutUserUsecase = di.registerSingleton(
+    LogoutUserUsecase(uiRepository: uiRepositoryImpl),
+  );
 
-  // // --- datasources ---
-  // di.registerLazySingleton<UserFirebaseDataSource>(
-  //   () => UserFirebaseDataSourceImpl(),
-  // );
+  di.registerFactory(() => UiBloc(logoutUserUsecase));
+  // ------------------- END: UserBloc -------------------
 }

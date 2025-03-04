@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:authentication_firebase/share/presentation/widgets/button_long.dart';
-import 'package:authentication_firebase/share/presentation/widgets/custom_text_field.dart';
+import 'package:authentication_firebase/share/ui/presentation/widgets/button_long.dart';
+import 'package:authentication_firebase/share/ui/presentation/widgets/custom_text_field.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   ForgotPasswordPage({super.key});

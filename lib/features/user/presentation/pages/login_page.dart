@@ -1,8 +1,8 @@
 import 'package:authentication_firebase/features/user/presentation/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:authentication_firebase/share/presentation/widgets/button_square_with_image.dart';
-import 'package:authentication_firebase/share/presentation/widgets/button_long.dart';
-import 'package:authentication_firebase/share/presentation/widgets/custom_text_field.dart';
+import 'package:authentication_firebase/share/ui/presentation/widgets/button_square_with_image.dart';
+import 'package:authentication_firebase/share/ui/presentation/widgets/button_long.dart';
+import 'package:authentication_firebase/share/ui/presentation/widgets/custom_text_field.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,17 +24,17 @@ class _LoginPageState extends State<LoginPage> {
       body: BlocBuilder<UserBloc, UserState>(
         builder: (_, state) {
           try {
-            if (state.isAuthenticated) {
-              debugPrint('User is Authenticated');
-              debugPrint('User is Authenticated: ${state.user?.name}');
-              // TODO: check this --------------------
-              SchedulerBinding.instance.scheduleFrameCallback((timeStamp) {
-                Navigator.pushNamed(context, 'register');
-              });
-              // TODO: check this --------------------
-            } else {
-              debugPrint('User is not Authenticated');
-            }
+            // if (state.isAuthenticated) {
+            //   debugPrint('User is Authenticated');
+            //   debugPrint('User is Authenticated: ${state.user?.name}');
+            //   // TODO: check this --------------------
+            //   SchedulerBinding.instance.scheduleFrameCallback((timeStamp) {
+            //     Navigator.pushNamed(context, 'register');
+            //   });
+            //   // TODO: check this --------------------
+            // } else {
+            //   debugPrint('User is not Authenticated');
+            // }
             return Center(
               child: SingleChildScrollView(
                 child: Column(
@@ -149,9 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                           imageSize: 40,
                           myOnTap: () {
                             debugPrint('Apple');
-                            debugPrint(
-                              'User is Authenticated?: ${state.isAuthenticated}',
-                            );
+                            debugPrint('User is Authenticated?:');
                           },
                         ),
                       ],

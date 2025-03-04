@@ -51,18 +51,20 @@ class UserFirebaseDataSourceImpl implements UserFirebaseDataSource {
           .signInWithEmailAndPassword(email: email, password: password);
       debugPrint(credentials.user?.uid);
 
-      // HERE: Firebase call
-      if (password == 'password123') {
+      if (credentials.user?.uid != null) {
         final MyUser user = MyUser(
-          id: "1",
-          name: 'name',
-          email: 'email@email.com',
-          password: 'password123',
+          id: credentials.user?.uid.toString() ?? '',
+          name: email,
+          email: email,
+          password: password,
           createAt: DateTime.now(),
         );
         return user;
       } else {
-        throw FormatException('Error - Wrong password. Try again.');
+        throw (FirebaseFailure(
+          message: 'Account cannot be created!',
+          code: '400',
+        ));
       }
     } catch (error) {
       if (kDebugMode) {
