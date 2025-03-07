@@ -1,4 +1,5 @@
-import 'package:authentication_firebase/features/user/presentation/bloc/user_bloc.dart';
+import 'package:authentication_firebase/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:authentication_firebase/share/ui/presentation/bloc/ui_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:authentication_firebase/share/ui/presentation/widgets/button_square_with_image.dart';
@@ -17,7 +18,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: BlocBuilder<UserBloc, UserState>(
+      body: BlocBuilder<AuthBloc, AuthState>(
         builder: (_, state) {
           return Center(
             child: SingleChildScrollView(
@@ -83,7 +84,7 @@ class RegisterPage extends StatelessWidget {
                         imageSize: 40,
                         myOnTap: () {
                           debugPrint('Google');
-                          BlocProvider.of<UserBloc>(
+                          BlocProvider.of<UiBloc>(
                             context,
                             listen: false,
                           ).add(LogoutUserEvent());
@@ -96,6 +97,13 @@ class RegisterPage extends StatelessWidget {
                         myOnTap: () {
                           debugPrint('Apple');
                           debugPrint('User is Authenticated?: ');
+                          debugPrint('User is Authenticated');
+                          // TODO: check this --------------------
+                          SchedulerBinding.instance.scheduleFrameCallback((
+                            timeStamp,
+                          ) {
+                            Navigator.pushNamed(context, 'login');
+                          });
                         },
                       ),
                     ],
@@ -111,6 +119,10 @@ class RegisterPage extends StatelessWidget {
                       const SizedBox(width: 4),
                       GestureDetector(
                         onTap: () {
+                          BlocProvider.of<AuthBloc>(
+                            context,
+                            listen: false,
+                          ).add(InitialAuthEvent());
                           SchedulerBinding.instance.scheduleFrameCallback((
                             timeStamp,
                           ) {

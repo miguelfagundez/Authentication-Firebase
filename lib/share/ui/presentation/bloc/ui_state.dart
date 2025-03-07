@@ -7,7 +7,7 @@ abstract class UiState {
 }
 
 class InitialUiState extends UiState {
-  const InitialUiState() : super(isAuthenticated: false);
+  const InitialUiState() : super(isAuthenticated: true);
 }
 
 class LogoutUserState extends UiState {

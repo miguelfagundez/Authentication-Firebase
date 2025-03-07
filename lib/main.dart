@@ -1,3 +1,4 @@
+import 'package:authentication_firebase/share/ui/presentation/bloc/ui_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:authentication_firebase/di.dart';
 import 'package:authentication_firebase/config/routes/app_routes.dart';
-import 'package:authentication_firebase/features/user/presentation/bloc/user_bloc.dart';
+import 'package:authentication_firebase/features/auth/presentation/bloc/auth_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +25,10 @@ class BlocWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => GetIt.instance.get<UserBloc>())],
+      providers: [
+        BlocProvider(create: (_) => GetIt.instance.get<AuthBloc>()),
+        BlocProvider(create: (_) => GetIt.instance.get<UiBloc>()),
+      ],
       child: MyApp(),
     );
   }

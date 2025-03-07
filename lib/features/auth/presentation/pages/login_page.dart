@@ -1,4 +1,7 @@
-import 'package:authentication_firebase/features/user/presentation/bloc/user_bloc.dart';
+import 'package:authentication_firebase/core/utils/enums.dart';
+import 'package:authentication_firebase/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:authentication_firebase/share/ui/presentation/bloc/ui_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:authentication_firebase/share/ui/presentation/widgets/button_square_with_image.dart';
 import 'package:authentication_firebase/share/ui/presentation/widgets/button_long.dart';
@@ -21,20 +24,19 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: BlocBuilder<UserBloc, UserState>(
+      body: BlocBuilder<AuthBloc, AuthState>(
         builder: (_, state) {
           try {
-            // if (state.isAuthenticated) {
-            //   debugPrint('User is Authenticated');
-            //   debugPrint('User is Authenticated: ${state.user?.name}');
-            //   // TODO: check this --------------------
-            //   SchedulerBinding.instance.scheduleFrameCallback((timeStamp) {
-            //     Navigator.pushNamed(context, 'register');
-            //   });
-            //   // TODO: check this --------------------
-            // } else {
-            //   debugPrint('User is not Authenticated');
-            // }
+            if (state.authStatus == AuthStatus.authenticated) {
+              debugPrint('User is Authenticated2');
+              // TODO: check this --------------------
+              SchedulerBinding.instance.scheduleFrameCallback((timeStamp) {
+                Navigator.pushNamed(context, 'register');
+              });
+              // TODO: check this --------------------
+            } else {
+              debugPrint('User is not Authenticated');
+            }
             return Center(
               child: SingleChildScrollView(
                 child: Column(
@@ -85,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                         debugPrint('Password: ${passwordController.text}');
                         if (emailController.text.isNotEmpty &&
                             passwordController.text.isNotEmpty) {
-                          BlocProvider.of<UserBloc>(context, listen: false).add(
+                          BlocProvider.of<AuthBloc>(context, listen: false).add(
                             AuthenticateUserWithEmailEvent(
                               email: emailController.text,
                               password: passwordController.text,
@@ -137,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
                           imageSize: 40,
                           myOnTap: () {
                             debugPrint('Google');
-                            BlocProvider.of<UserBloc>(
+                            BlocProvider.of<UiBloc>(
                               context,
                               listen: false,
                             ).add(LogoutUserEvent());
@@ -150,6 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                           myOnTap: () {
                             debugPrint('Apple');
                             debugPrint('User is Authenticated?:');
+                            FirebaseAuth.instance.signOut();
                           },
                         ),
                       ],

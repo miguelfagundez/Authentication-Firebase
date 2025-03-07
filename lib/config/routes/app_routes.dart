@@ -1,14 +1,14 @@
 import 'package:authentication_firebase/config/routes/route_model.dart';
-import 'package:authentication_firebase/features/account/presentation/pages/home_page.dart';
-import 'package:authentication_firebase/features/user/presentation/pages/auth_page.dart';
-import 'package:authentication_firebase/features/user/presentation/pages/forgot_password_page.dart';
-import 'package:authentication_firebase/features/user/presentation/pages/login_page.dart';
-import 'package:authentication_firebase/features/user/presentation/pages/register_page.dart';
+import 'package:authentication_firebase/features/auth/presentation/pages/auth_page.dart';
+import 'package:authentication_firebase/features/auth/presentation/pages/forgot_password_page.dart';
+import 'package:authentication_firebase/features/auth/presentation/pages/login_page.dart';
+import 'package:authentication_firebase/features/auth/presentation/pages/register_page.dart';
+import 'package:authentication_firebase/share/ui/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 abstract class AppRoutes {
   // Initial screen
-  static const initialRoute = 'auth';
+  static const initialRoute = 'login';
 
   // Route models - App routes
   static final menuRoutes = <RouteModel>[

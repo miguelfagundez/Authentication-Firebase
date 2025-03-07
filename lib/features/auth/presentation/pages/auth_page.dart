@@ -1,5 +1,5 @@
-import 'package:authentication_firebase/features/account/presentation/pages/home_page.dart';
-import 'package:authentication_firebase/features/user/presentation/pages/login_page.dart';
+import 'package:authentication_firebase/features/auth/presentation/pages/login_page.dart';
+import 'package:authentication_firebase/share/ui/presentation/pages/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 

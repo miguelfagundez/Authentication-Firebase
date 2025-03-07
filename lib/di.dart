@@ -6,7 +6,7 @@ import 'package:authentication_firebase/share/ui/data/repositories/ui_repository
 import 'package:authentication_firebase/share/ui/domain/usecases/logout_user_usecase.dart';
 import 'package:authentication_firebase/share/ui/presentation/bloc/ui_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:authentication_firebase/features/user/presentation/bloc/user_bloc.dart';
+import 'package:authentication_firebase/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:authentication_firebase/features/user/data/datasources/user_datasource.dart';
 // import 'package:authentication_firebase/features/user/domain/usecases/register_user_usecase.dart';
 import 'package:authentication_firebase/features/user/data/repositories/user_repository_impl.dart';
@@ -40,7 +40,7 @@ Future<void> initServices() async {
   // );
 
   di.registerFactory(
-    () => UserBloc(
+    () => AuthBloc(
       authenticateUserWithEmailUsecase,
       changePasswordUsecase,
       registerUserUsecase,

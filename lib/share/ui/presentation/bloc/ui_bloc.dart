@@ -1,3 +1,4 @@
+import 'package:authentication_firebase/core/utils/enums.dart';
 import 'package:authentication_firebase/share/ui/domain/usecases/logout_user_usecase.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

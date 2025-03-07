@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:authentication_firebase/core/utils/enums.dart';
 import 'package:authentication_firebase/features/user/domain/entities/user.dart';
 import 'package:authentication_firebase/features/user/domain/usecases/authenticate_user_with_email_usecase.dart';
 import 'package:authentication_firebase/features/user/domain/usecases/change_password_usecase.dart';
@@ -8,16 +9,16 @@ import 'package:authentication_firebase/features/user/domain/usecases/register_u
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 
-part 'user_event.dart';
-part 'user_state.dart';
+part 'auth_event.dart';
+part 'auth_state.dart';
 
-class UserBloc extends Bloc<UserEvent, UserState> {
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthenticateUserWithEmailUsecase _authenticateUserWithEmailUsecase;
   final ChangePasswordUsecase _changePasswordUsecase;
   final RegisterUserUsecase _registerUserUsecase;
   // final LogoutUseCase _logoutUsecase;
 
-  UserBloc(
+  AuthBloc(
     this._authenticateUserWithEmailUsecase,
     this._changePasswordUsecase,
     this._registerUserUsecase,
@@ -31,7 +32,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
 
   _changePasswordEvent(
     ChangePasswordEvent event,
-    Emitter<UserState> emit,
+    Emitter<AuthState> emit,
   ) async {
     final resp = await _changePasswordUsecase(event.email);
 
@@ -53,7 +54,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   // TODO THIS SHOULD BE IN UI BLOC
   _registerUserEvent(
     RegisterUserWithEmailEvent event,
-    Emitter<UserState> emit,
+    Emitter<AuthState> emit,
   ) async {
     final resp = await _registerUserUsecase(
       event.email,
@@ -72,14 +73,15 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           'User was Authenticated successfully, ${userAuthenticatedSuccess.email}',
         );
         //add(SomeUserEvent());
-        emit(UserAuthenticateSuccessfulState(userAuthenticatedSuccess));
+        // TODO Save User Data
+        emit(UserAuthenticateSuccessfulState());
       },
     );
   }
 
   _authenticateUserWithEmailEvent(
     AuthenticateUserWithEmailEvent event,
-    Emitter<UserState> emit,
+    Emitter<AuthState> emit,
   ) async {
     final resp = await _authenticateUserWithEmailUsecase(
       event.email,
@@ -96,7 +98,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
           'User was Authenticated successfully, ${userAuthenticatedSuccess.email}',
         );
         //add(SomeUserEvent());
-        emit(UserAuthenticateSuccessfulState(userAuthenticatedSuccess));
+        // TODO Save User Data
+        emit(UserAuthenticateSuccessfulState());
       },
     );
   }

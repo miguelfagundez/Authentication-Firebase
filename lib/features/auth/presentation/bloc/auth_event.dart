@@ -1,32 +1,28 @@
-part of 'user_bloc.dart';
+part of 'auth_bloc.dart';
 
 @immutable
-abstract class UserEvent {}
+abstract class AuthEvent {}
 
-class InitialUserEvent extends UserEvent {
-  InitialUserEvent();
+class InitialAuthEvent extends AuthEvent {
+  InitialAuthEvent();
 }
 
-class AuthenticateUserWithEmailEvent extends UserEvent {
+class AuthenticateUserWithEmailEvent extends AuthEvent {
   final String email;
   final String password;
 
   AuthenticateUserWithEmailEvent({required this.email, required this.password});
 }
 
-class RegisterUserWithEmailEvent extends UserEvent {
+class RegisterUserWithEmailEvent extends AuthEvent {
   final String email;
   final String password;
 
   RegisterUserWithEmailEvent({required this.email, required this.password});
 }
 
-class ChangePasswordEvent extends UserEvent {
+class ChangePasswordEvent extends AuthEvent {
   final String email;
 
   ChangePasswordEvent({required this.email});
-}
-
-class LogoutUserEvent extends UserEvent {
-  LogoutUserEvent();
 }
